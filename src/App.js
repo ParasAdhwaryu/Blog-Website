@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Createblog from './components/Createblog';
+import Items from './components/Items';
+import Errorpage from './components/Errorpage';
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Single from './components/Single';
+import Login from './components/Login';
+import Signin from './components/Signin';
+import { UserAuthContextProvider } from './context/UserAuthContext';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <div>
+    <Router>
+    <UserAuthContextProvider>
+    <Navbar/>
+     <Routes>
+      <Route exact path='/' element={<Items type={'home'}/>}></Route>
+      <Route exact path='/blog' element={<Items type={'home'}/>}></Route>
+      <Route exact path='Sports' element={<Items type={'sports'}/>}></Route>
+      <Route exact path='Fitness' element={<Items type={'fitness'}/>}></Route>
+      <Route exact path='Education' element={<Items type={'education'}/>}></Route>
+      <Route exact path='Foodrecipies' element={<Items type={'food recipes'}/>}></Route>
+      <Route exact path='Travel' element={<Items type={'travel'}/>}></Route>
+      <Route exact path='createblog/*' element={<Createblog/>}/>
+      <Route exact path='login' element={<Login/>}></Route>
+      <Route exact path='signin' element={<Signin/>}></Route>
+      <Route exact path='blog/*' element={<Single/>}></Route>
+      <Route path='*' element={<Errorpage/>} ></Route>
+     </Routes>
+     </UserAuthContextProvider>
+    </Router>
+     </div>
+
   );
 }
 
