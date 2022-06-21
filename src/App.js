@@ -11,13 +11,13 @@ import Signin from './components/Signin';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 function App() {
   return (
-    //style={{backgroundImage:`url(${img})`}}
+    //style={{backgroundImage:`url(${img})`}}https://parasadhwaryu.github.io/BlogKnot
      <div>
     <Router>
     <UserAuthContextProvider>
     <Navbar/>
      <Routes>
-      <Route exact path='https://parasadhwaryu.github.io/BlogKnot/' element={<Items type={'home'}/>}></Route>
+      <Route exact path='/' element={<Items type={'home'}/>}></Route>
       <Route exact path='/blog' element={<Items type={'home'}/>}></Route>
       <Route exact path='Sports' element={<Items type={'sports'}/>}></Route>
       <Route exact path='Fitness' element={<Items type={'fitness'}/>}></Route>
