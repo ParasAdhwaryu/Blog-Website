@@ -17,7 +17,7 @@ function App() {
     <UserAuthContextProvider>
     <Navbar/>
      <Routes>
-     <Route exact path='/' element={<Items type={'home'}/>}></Route>
+     {/* <Route exact path='/' element={<Items type={'home'}/>}></Route> */}
       <Route exact path='/Blog-knot/*' element={<Items type={'home'}/>}></Route>
       <Route exact path='/blog' element={<Items type={'home'}/>}></Route>
       <Route exact path='Sports' element={<Items type={'sports'}/>}></Route>
