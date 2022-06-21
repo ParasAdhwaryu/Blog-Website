@@ -15,8 +15,9 @@ export function UserAuthContextProvider({ children }) {
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function signUp(email, password,name) {
-    return createUserWithEmailAndPassword(auth, email, password,name);
+  function signUp(email, password) {
+    console.log(email,password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
   function logOut() {
     return signOut(auth);

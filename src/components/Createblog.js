@@ -1,78 +1,97 @@
-import { addDoc, collection,deleteDoc,doc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React from "react";
-import {db} from "../firebaseConfig"
+import { db } from "../firebaseConfig";
 import { useState, useEffect } from "react";
-import {getDocs} from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 function Createblog() {
- let url=window.location.href;
- let urla=url.split('/');
- let len=urla.length-1;
- //console.log(urla);
- const [obj,Setobj]=useState({
-  author:'',
-  email:'',
-  blog:'',
-  blogtype:'',
-  image:'',
-})
- const blogref = collection(db, "Blogs");
- useEffect(() => {
-  if(String(urla[len])!=='createblog'){
-  const getBlogs = async () => {
-    const data = await getDocs(blogref);
-    const arr = data.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    const items = arr.filter((element) => {
-        return String(element.id) === String(urla[len]);
-    });
-      Setobj({
-        author:items[0].author,
-        email:items[0].email,
-        blog:items[0].blog,
-        blogtype:items[0].blogtype,
-        image:items[0].image,
-      });
+  let url = window.location.href;
+  let urla = url.split("/");
+  let len = urla.length - 1;
+  console.log(urla);
+  const [obj, Setobj] = useState({
+    author: "",
+    email: "",
+    blog: "",
+    blogtype: "",
+    image: "",
+  });
+  const blogref = collection(db, "Blogs");
+  useEffect(() => {
+    if (String(urla[len]) !== "createblog") {
+      const getBlogs = async () => {
+        const data = await getDocs(blogref);
+        const arr = data.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        const items = arr.filter((element) => {
+          return String(element.id) === String(urla[len]);
+        });
+        Setobj({
+          author: items[0].author,
+          email: items[0].email,
+          blog: items[0].blog,
+          blogtype: items[0].blogtype,
+          image: items[0].image,
+        });
+      };
+      getBlogs();
+    }
+    // eslint-disable-next-line
+  }, [url]);
+  const onDelete = async () => {
+    await deleteDoc(doc(db, "Blogs", urla[len]));
   };
-  getBlogs();
-  }
-  // eslint-disable-next-line
-}, [url]);
-const onDelete=async()=>{
-  await deleteDoc(doc(db,'Blogs',urla[len]));
-}
- let name,value;
- const updateDetails=(e)=>{
-    name=e.target.name;
-    value=e.target.value;
-    Setobj({...obj,[name]:value});
- }
-  const publishBlog=async(e)=>{
-       e.preventDefault();
-       onDelete();
-       const {author,email,blog,blogtype,image}=obj;
-       if(author!=='' && email!=='' && blog!=='' && blogtype!=='' && image!==''){
-       await addDoc(collection(db,"Blogs"),{author,email,blog,blogtype,image}).then(()=>{urla[len]==='createblog'?alert("Your Data is Stored Successfuly"):alert("Your Data is updated Successfuly")}).catch(err=>{alert(err.message)});
-       Setobj({
-        author:'',
-        email:'',
-        blog:'',
-        blogtype:'',
-        image:'',
-     })
-     }
-     else{
-      alert("Kindly fill all the given fields")
+  let name, value;
+  const updateDetails = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    Setobj({ ...obj, [name]: value });
+  };
+  const publishBlog = async (e) => {
+    e.preventDefault();
+    onDelete();
+    const { author, email, blog, blogtype, image } = obj;
+    if (
+      author !== "" &&
+      email !== "" &&
+      blog !== "" &&
+      blogtype !== "" &&
+      image !== ""
+    ) {
+      await addDoc(collection(db, "Blogs"), {
+        author,
+        email,
+        blog,
+        blogtype,
+        image,
+      })
+        .then(() => {
+          urla[len] === "createblog"
+            ? alert("Your Blog Is Published Successfuly")
+            : alert("Your Data Is Updated Successfuly");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
       Setobj({
-        author:'',
-        email:'',
-        blog:'',
-        blogtype:'',
-        image:'',
-     })
-     }
- }
+        author: "",
+        email: "",
+        blog: "",
+        blogtype: "",
+        image: "",
+      });
+    } else {
+      alert("Kindly fill all the given fields");
+      Setobj({
+        author: "",
+        email: "",
+        blog: "",
+        blogtype: "",
+        image: "",
+      });
+    }
+  };
   return (
     <div
       className="container justify-content-center"
@@ -138,10 +157,16 @@ const onDelete=async()=>{
           />
         </div>
         <div className="col-12">
-        <button type="submit" className="btn btn-primary" onClick={(e)=>{publishBlog(e)}}>
-           {urla[len]==='createblog'?"Publish Your blog":'Update'}
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={(e) => {
+              publishBlog(e);
+            }}
+          >
+            {urla[len] === "createblog" ? "Publish Your blog" : "Update"}
           </button>
-          </div>
+        </div>
       </form>
     </div>
   );

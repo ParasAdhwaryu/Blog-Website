@@ -1,17 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom"
-import logo from '../components/logo.png'
-import {useUserAuth} from '../context/UserAuthContext'
+import { Link } from "react-router-dom";
+import logo from "../components/logo.png";
+import { useUserAuth } from "../context/UserAuthContext";
 import Logout from "./Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 function Navbar() {
-  const {user}=useUserAuth();
+  const { user } = useUserAuth();
   //console.log(user.email);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-           <img src={logo} style={{width:'110%',height:'30px'}}></img>
+            <img
+              src={logo}
+              style={{ width: "110%", height: "30px" }}
+              alt=""
+            ></img>
           </Link>
           <button
             className="navbar-toggler"
@@ -51,21 +57,38 @@ function Navbar() {
                   Education Blog
                 </Link>
               </li>
-              
-            {user && <li className="nav-item">
-                <Link className="nav-link" to="/createblog">
-                  Create Blog
-                </Link>
-              </li>
-            }
+
+              {user && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/createblog">
+                    Create Blog
+                  </Link>
+                </li>
+              )}
             </ul>
-            {!user?
-            <>
-            <button className="btn btn-dark"><Link style={{textDecoration:'none',color:'white'}} to='/login'>Log in</Link></button>
-            <button className="btn btn-success mx-3"><Link style={{textDecoration:'none',color:'white'}} to='/signin'>Sign up</Link></button>
-            </>: <Logout/>
-            }
-          </div> 
+            {!user ? (
+              <>
+                <button className="btn btn-dark" title="Login">
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    to="/login"
+                  >
+                    Login <LoginIcon />
+                  </Link>
+                </button>
+                <button className="btn btn-primary mx-3" title="Signin">
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    to="/signin"
+                  >
+                    Sign up <AddRoundedIcon />
+                  </Link>
+                </button>
+              </>
+            ) : (
+              <Logout />
+            )}
+          </div>
         </div>
       </nav>
     </div>

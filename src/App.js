@@ -6,10 +6,12 @@ import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Single from './components/Single';
 import Login from './components/Login';
+// import img from './components/pattern.jpg'
 import Signin from './components/Signin';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 function App() {
   return (
+    //style={{backgroundImage:`url(${img})`}}
      <div>
     <Router>
     <UserAuthContextProvider>
@@ -23,6 +25,7 @@ function App() {
       <Route exact path='Foodrecipies' element={<Items type={'food recipes'}/>}></Route>
       <Route exact path='Travel' element={<Items type={'travel'}/>}></Route>
       <Route exact path='createblog/*' element={<Createblog/>}/>
+      <Route exact path='blog/createblog/*' element={<Createblog/>}/>
       <Route exact path='login' element={<Login/>}></Route>
       <Route exact path='signin' element={<Signin/>}></Route>
       <Route exact path='blog/*' element={<Single/>}></Route>

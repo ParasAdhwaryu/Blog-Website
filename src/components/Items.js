@@ -57,16 +57,17 @@ function Items(props) {
     Setblogs(refresh);
     Setsearch("");
   };
-  
+  //width: "50%", marginTop: "-150px",style={{marginLeft:'450px' }} d-flex flx-wrap justify-content-center
   return (
     <>
-      <Parallax bgImage={parallaxbg}>
+    <div className="d-flex flex-column mb-3 justify-content-center" style={{width:'100%'}}>
+      <Parallax className="p-2" bgImage={parallaxbg}>
         <div
-          className="d-flex flex-wrap"
+          className="d-flex flex-wrap align-items-center justify-content-center mx-5"
           style={{
-            height: "300px",
-            marginTop: "200px",
-            marginLeft: "150px",
+            height: "120px",
+            marginTop:'150px',
+            width:'100%'
           }}
         >
           <Search
@@ -74,9 +75,8 @@ function Items(props) {
             clickHandler={onClickhandler}
             val={search}
           />
-        </div>
-        <div className="d-flex flex-wrap" style={{marginLeft:'450px' }}>
-        <div className="d-flex flx-wrap justify-content-center" style={{ width: "50%", marginTop: "-150px",color:'white',fontWeight:'bold',fontSize:'30px' }}>
+          </div>
+          <div className="d-flex flex-wrap  align-items-center justify-content-center my-2 mx-3" style={{fontSize:'25px',color:'white',fontWeight:'bold',fontFamily:'cursive',height:'200px',widht:'100%'}}>
           <Typewriter
             options={{
               strings: ["Welcome to the","World of blogs.","“The first step in blogging is not...", "writing them but reading them.“","“Blogging is a communications...","mechanism handed to us by the...", "long tail of the Internet.”"],
@@ -88,8 +88,8 @@ function Items(props) {
             }}
           />
           </div>
-        </div>
       </Parallax>
+      </div>
       {blogs.length !== 0 ? (
         <>
           <div className="container ">
