@@ -1,6 +1,6 @@
 {
-  "homepage": "https://ParasAdhwaryu.github.io",
   "name": "blogwebsite",
+  "homepage": "https://ParasAdhwaryu.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
