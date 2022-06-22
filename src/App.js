@@ -1,12 +1,12 @@
 import './App.css';
 import Createblog from './components/Createblog';
 import Items from './components/Items';
-import Errorpage from './components/Errorpage';
+// import Errorpage from './components/Errorpage';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Single from './components/Single';
 import Login from './components/Login';
-// import img from './components/pattern.jpg'
+// import { useNavigate } from 'react-router-dom';
 import Signin from './components/Signin';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 function App() {
@@ -18,7 +18,6 @@ function App() {
     <Navbar/>
      <Routes>
      <Route exact path='/' element={<Items type={'home'}/>}></Route>
-      {/* <Route exact path='Blog-knot' element={<Items type={'home'}/>}></Route> */}
       <Route exact path='/blog' element={<Items type={'home'}/>}></Route>
       <Route exact path='Sports' element={<Items type={'sports'}/>}></Route>
       <Route exact path='Fitness' element={<Items type={'fitness'}/>}></Route>
@@ -30,7 +29,7 @@ function App() {
       <Route exact path='login' element={<Login/>}></Route>
       <Route exact path='signin' element={<Signin/>}></Route>
       <Route exact path='blog/*' element={<Single/>}></Route>
-      <Route path='*' element={<Errorpage/>} ></Route>
+      <Route path='*' element={<Items type={'home'}/>}></Route>
      </Routes>
      </UserAuthContextProvider>
     </Router>
