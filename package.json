@@ -1,6 +1,6 @@
-{
+{ 
+  "homepage":"https://ParasAdhwaryu.github.io/Blog-Website",
   "name": "blogwebsite",
-  "homepage":"https://ParasAdhwaryu.github.io/BlogKnot",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
