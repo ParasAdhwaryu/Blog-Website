@@ -2,13 +2,16 @@ import React from 'react'
 import { deleteDoc,doc } from 'firebase/firestore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { db } from "../firebaseConfig";
+import {useNavigate} from 'react-router-dom'
 function Deleteblog(props) {
+   const navigate=useNavigate();
     const onDelete=async(e)=>{
         e.preventDefault();
         try{
             await deleteDoc(doc(db,'Blogs',props.id));
             alert("Your blog is deleted");
-            window.location.reload();
+            // window.location.reload();
+            navigate('/');
         }
         catch(err){
             console.log(err.message);

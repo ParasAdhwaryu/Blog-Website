@@ -2,11 +2,13 @@ import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React from "react";
 import { db } from "../firebaseConfig";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getDocs } from "firebase/firestore";
 function Createblog() {
   let url = window.location.href;
   let urla = url.split("/");
   let len = urla.length - 1;
+  const navigate=useNavigate();
   console.log(urla);
   const [obj, Setobj] = useState({
     author: "",
@@ -81,6 +83,7 @@ function Createblog() {
         blogtype: "",
         image: "",
       });
+      navigate('/');
     } else {
       alert("Kindly fill all the given fields");
       Setobj({
